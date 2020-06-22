@@ -4,6 +4,8 @@ import {MTLLoader} from "../three.js/examples/jsm/loaders/MTLLoader.js";
 import {OBJLoader} from "../three.js/examples/jsm/loaders/OBJLoader.js";
 import {ColladaLoader} from "../three.js/examples/jsm/loaders/ColladaLoader.js";
 import Grass from "./Grass.js";
+import BigTree from "./BigTree.js";
+import SmallTree from "./SmallTree.js";
 
 let scene = new THREE.Scene();
 scene.fog = new THREE.Fog(0x787e74, 0.1, 60);
@@ -18,7 +20,7 @@ document.body.appendChild(renderer.domElement);
 let texture = THREE.ImageUtils.loadTexture("./src/grass.jpg");
 texture.wrapS = THREE.RepeatWrapping;
 texture.wrapT = THREE.RepeatWrapping;
-texture.repeat.set(50, 50);
+texture.repeat.set(40, 40);
 let planeGeometry = new THREE.PlaneBufferGeometry(100, 100, 8, 8);
 let material = new THREE.MeshLambertMaterial({map: texture});
 let plane = new THREE.Mesh(planeGeometry, material);
@@ -36,62 +38,17 @@ camera.position.x = 0;
 camera.position.z = 15;
 
 controls.update();
-
 const modelsPath = "./src/models/";
 
 let grass = new Grass(modelsPath);
 grass.load(scene);
 
-var treeOneLoader = new ColladaLoader();
-treeOneLoader.setPath("./src/models/");
-treeOneLoader.load("Trre1.dae", function (tree) {
-   let dae = tree.scene;
-   dae.scale.set(0.1, 0.1, 0.1);
-   dae.position.set(-5, 0, -8);
-   scene.add(dae);
-});
+let bigTree = new BigTree(modelsPath);
+bigTree.load(scene);
 
-treeOneLoader.load("Trre1.dae", function (tree) {
-    let dae = tree.scene;
-    dae.rotateZ(-1.15);
-    dae.scale.set(0.1, 0.1, 0.1);
-    dae.position.set(7, 0, -6);
-    scene.add(dae);
-});
+let smallTree = new SmallTree(modelsPath);
+smallTree.load(scene);
 
-
-var treeTwoLoader = new ColladaLoader();
-treeTwoLoader.setPath("./src/models/Tree2/");
-treeTwoLoader.load("Tree2.dae", function (tree) {
-    let dae = tree.scene;
-    dae.scale.set(0.3, 0.3, 0.3);
-    dae.position.set(10, 0, 0);
-    scene.add(dae);
-});
-
-treeTwoLoader.load("Tree2.dae", function (tree) {
-    let dae = tree.scene;
-    dae.scale.set(0.3, 0.3, 0.3);
-    dae.rotateZ(-1.15);
-    dae.position.set(-8, 0, 0);
-    scene.add(dae);
-});
-
-treeTwoLoader.load("Tree2.dae", function (tree) {
-    let dae = tree.scene;
-    dae.scale.set(0.3, 0.3, 0.3);
-    dae.rotateZ(-1.5);
-    dae.position.set(-10, 0, 5);
-    scene.add(dae);
-});
-
-treeTwoLoader.load("Tree2.dae", function (tree) {
-    let dae = tree.scene;
-    dae.scale.set(0.3, 0.3, 0.3);
-    dae.rotateZ(-1.7);
-    dae.position.set(0, 0, -10);
-    scene.add(dae);
-});
 
 var pantherLoader = new ColladaLoader();
 pantherLoader.setPath("./src/models/");
