@@ -1,11 +1,10 @@
 import * as THREE from "../three.js/build/three.module.js";
 import {OrbitControls} from "../three.js/examples/jsm/controls/OrbitControls.js";
-import {MTLLoader} from "../three.js/examples/jsm/loaders/MTLLoader.js";
-import {OBJLoader} from "../three.js/examples/jsm/loaders/OBJLoader.js";
-import {ColladaLoader} from "../three.js/examples/jsm/loaders/ColladaLoader.js";
 import Grass from "./Grass.js";
 import BigTree from "./BigTree.js";
 import SmallTree from "./SmallTree.js";
+import Panther from "./Panther.js";
+import Capybara from "./Capybara.js";
 
 let scene = new THREE.Scene();
 scene.fog = new THREE.Fog(0x787e74, 0.1, 60);
@@ -49,27 +48,11 @@ bigTree.load(scene);
 let smallTree = new SmallTree(modelsPath);
 smallTree.load(scene);
 
+let panther = new Panther(modelsPath);
+panther.load(scene);
 
-var pantherLoader = new ColladaLoader();
-pantherLoader.setPath("./src/models/");
-pantherLoader.load("panter.dae", function (daeScene) {
-    let dae = daeScene.scene;
-    dae.scale.set(0.05, 0.05, 0.05);
-    dae.rotateZ(-Math.PI/4);
-    dae.position.set(5, 0, -2);
-    scene.add(dae);
-});
-
-var capybaraLoader = new ColladaLoader();
-capybaraLoader.setPath("./src/models/");
-capybaraLoader.load("capybara.dae", function (daeScene) {
-    let dae = daeScene.scene;
-    dae.rotateZ(-Math.PI/2);
-    dae.scale.set(0.05, 0.05, 0.05);
-    dae.position.set(-1.7, 0, 4);
-    scene.add(dae);
-});
-
+let capybara = new Capybara(modelsPath);
+capybara.load(scene);
 
 var animate = function () {
     requestAnimationFrame( animate );
