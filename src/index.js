@@ -39,37 +39,56 @@ camera.position.z = 15;
 
 controls.update();
 
-var mtlLoader = new MTLLoader();
-mtlLoader.setPath("./src/models/");
-mtlLoader.load("tree03.mtl", function (materials) {
-    materials.preload();
+var treeOneLoader = new ColladaLoader();
+treeOneLoader.setPath("./src/models/");
+treeOneLoader.load("Trre1.dae", function (tree) {
+   let dae = tree.scene;
+   dae.scale.set(0.1, 0.1, 0.1);
+   dae.position.set(-5, 0, -8);
+   scene.add(dae);
+});
 
-    var objLoader = new OBJLoader();
-    objLoader.setMaterials(materials);
-    objLoader.setPath("./src/models/");
-    objLoader.load("tree02.obj", function (object) {
-        object.scale.set(1, 1, 1);
-        object.position.set(10, 0, 0);
-        object.rotation.set(0, 0, 0);
-        scene.add(object);
-    });
-
-    objLoader.load("tree02.obj", function (object) {
-        object.scale.set(1, 1, 1);
-        object.position.set(-10, 0, 0);
-        object.rotation.set(0, 1.15, 0);
-        scene.add(object);
-    });
-
-    objLoader.load("tree02.obj", function (object) {
-        object.scale.set(1, 1, 1);
-        object.position.set(0, 0, -8);
-        object.rotation.set(0, 1.5, 0);
-        scene.add(object);
-    });
+treeOneLoader.load("Trre1.dae", function (tree) {
+    let dae = tree.scene;
+    dae.rotateZ(-1.15);
+    dae.scale.set(0.1, 0.1, 0.1);
+    dae.position.set(7, 0, -6);
+    scene.add(dae);
 });
 
 
+var treeTwoLoader = new ColladaLoader();
+treeTwoLoader.setPath("./src/models/Tree2/");
+treeTwoLoader.load("Tree2.dae", function (tree) {
+    let dae = tree.scene;
+    dae.scale.set(0.3, 0.3, 0.3);
+    dae.position.set(10, 0, 0);
+    scene.add(dae);
+});
+
+treeTwoLoader.load("Tree2.dae", function (tree) {
+    let dae = tree.scene;
+    dae.scale.set(0.3, 0.3, 0.3);
+    dae.rotateZ(-1.15);
+    dae.position.set(-8, 0, 0);
+    scene.add(dae);
+});
+
+treeTwoLoader.load("Tree2.dae", function (tree) {
+    let dae = tree.scene;
+    dae.scale.set(0.3, 0.3, 0.3);
+    dae.rotateZ(-1.5);
+    dae.position.set(-10, 0, 5);
+    scene.add(dae);
+});
+
+treeTwoLoader.load("Tree2.dae", function (tree) {
+    let dae = tree.scene;
+    dae.scale.set(0.3, 0.3, 0.3);
+    dae.rotateZ(-1.7);
+    dae.position.set(0, 0, -10);
+    scene.add(dae);
+});
 
 var mtlLoader3 = new MTLLoader();
 mtlLoader3.setPath("./src/models/");
