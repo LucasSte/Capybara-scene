@@ -3,13 +3,14 @@ import {OrbitControls} from "../three.js/examples/jsm/controls/OrbitControls.js"
 import {MTLLoader} from "../three.js/examples/jsm/loaders/MTLLoader.js";
 import {OBJLoader} from "../three.js/examples/jsm/loaders/OBJLoader.js";
 import {ColladaLoader} from "../three.js/examples/jsm/loaders/ColladaLoader.js";
+import Grass from "./Grass.js";
 
 let scene = new THREE.Scene();
 scene.fog = new THREE.Fog(0x787e74, 0.1, 60);
 let camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
 
 let renderer = new THREE.WebGLRenderer();
-//renderer.setClearColor(0x87CEEB, 1);
+//renderer.setClearColor(0x87CEEB, 1); -> This is the blue sky color
 renderer.setClearColor(0x787e74, 1);
 renderer.setSize(window.innerWidth, window.innerHeight);
 document.body.appendChild(renderer.domElement);
@@ -25,9 +26,6 @@ planeGeometry.rotateX( - Math.PI / 2);
 
 scene.add(plane);
 
-
-camera.position.z = 5;
-
 let light = new THREE.PointLight(0xffffff);
 light.position.set(0, 20, 10);
 scene.add(light);
@@ -38,6 +36,11 @@ camera.position.x = 0;
 camera.position.z = 15;
 
 controls.update();
+
+const modelsPath = "./src/models/";
+
+let grass = new Grass(modelsPath);
+grass.load(scene);
 
 var treeOneLoader = new ColladaLoader();
 treeOneLoader.setPath("./src/models/");
@@ -90,31 +93,6 @@ treeTwoLoader.load("Tree2.dae", function (tree) {
     scene.add(dae);
 });
 
-var mtlLoader3 = new MTLLoader();
-mtlLoader3.setPath("./src/models/");
-mtlLoader3.load("LowPolyGrass.mtl", function (materials) {
-    materials.preload();
-
-    var objLoader = new OBJLoader();
-    objLoader.setMaterials(materials);
-    objLoader.setPath("./src/models/");
-    var i;
-    let xPos = [-5, -4, 0, 1, 6, 10, -7, -2, 4, 5];
-    let zPos = [5, 4, 0, 1, 6, 0, -3, -2, 3, 8];
-    for(i=0; i<10; i++)
-    {
-        let x = xPos[i];
-        let z = zPos[i];
-        objLoader.load("LowPolyGrass.obj", function (object2) {
-            object2.scale.set(0.5, 0.5, 0.5);
-            object2.position.set(x, 0, z);
-            object2.rotation.set(0, Math.PI/(x*z/3), 0);
-            scene.add(object2);
-        });
-    }
-
-});
-
 var pantherLoader = new ColladaLoader();
 pantherLoader.setPath("./src/models/");
 pantherLoader.load("panter.dae", function (daeScene) {
@@ -138,8 +116,6 @@ capybaraLoader.load("capybara.dae", function (daeScene) {
 
 var animate = function () {
     requestAnimationFrame( animate );
-
-
     renderer.render( scene, camera );
 };
 
