@@ -2,9 +2,10 @@ import * as THREE from "../three.js/build/three.module.js";
 import {OrbitControls} from "../three.js/examples/jsm/controls/OrbitControls.js";
 import {MTLLoader} from "../three.js/examples/jsm/loaders/MTLLoader.js";
 import {OBJLoader} from "../three.js/examples/jsm/loaders/OBJLoader.js";
+import {ColladaLoader} from "../three.js/examples/jsm/loaders/ColladaLoader.js";
 
 let scene = new THREE.Scene();
-scene.fog = new THREE.Fog(0x787e74, 0.1, 80);
+scene.fog = new THREE.Fog(0x787e74, 0.1, 60);
 let camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
 
 let renderer = new THREE.WebGLRenderer();
@@ -17,7 +18,7 @@ let texture = THREE.ImageUtils.loadTexture("./src/grass.jpg");
 texture.wrapS = THREE.RepeatWrapping;
 texture.wrapT = THREE.RepeatWrapping;
 texture.repeat.set(50, 50);
-let planeGeometry = new THREE.PlaneBufferGeometry(200, 200, 8, 8);
+let planeGeometry = new THREE.PlaneBufferGeometry(100, 100, 8, 8);
 let material = new THREE.MeshLambertMaterial({map: texture});
 let plane = new THREE.Mesh(planeGeometry, material);
 planeGeometry.rotateX( - Math.PI / 2);
@@ -34,13 +35,13 @@ scene.add(light);
 let controls = new OrbitControls(camera, renderer.domElement);
 camera.position.y = 10;
 camera.position.x = 0;
-camera.position.z = 35;
+camera.position.z = 15;
 
 controls.update();
 
 var mtlLoader = new MTLLoader();
 mtlLoader.setPath("./src/models/");
-mtlLoader.load("tree02.mtl", function (materials) {
+mtlLoader.load("tree03.mtl", function (materials) {
     materials.preload();
 
     var objLoader = new OBJLoader();
@@ -52,23 +53,23 @@ mtlLoader.load("tree02.mtl", function (materials) {
         object.rotation.set(0, 0, 0);
         scene.add(object);
     });
-});
 
-var mtlLoader2 = new MTLLoader();
-mtlLoader2.setPath("./src/models/");
-mtlLoader2.load("tree02.mtl", function (materials) {
-    materials.preload();
+    objLoader.load("tree02.obj", function (object) {
+        object.scale.set(1, 1, 1);
+        object.position.set(-10, 0, 0);
+        object.rotation.set(0, 1.15, 0);
+        scene.add(object);
+    });
 
-    var objLoader = new OBJLoader();
-    objLoader.setMaterials(materials);
-    objLoader.setPath("./src/models/");
-    objLoader.load("tree02.obj", function (object2) {
-        object2.scale.set(1, 1, 1);
-        object2.position.set(-10, 0, 0);
-        object2.rotation.set(0, 1.15, 0);
-        scene.add(object2);
+    objLoader.load("tree02.obj", function (object) {
+        object.scale.set(1, 1, 1);
+        object.position.set(0, 0, -8);
+        object.rotation.set(0, 1.5, 0);
+        scene.add(object);
     });
 });
+
+
 
 var mtlLoader3 = new MTLLoader();
 mtlLoader3.setPath("./src/models/");
@@ -93,7 +94,27 @@ mtlLoader3.load("LowPolyGrass.mtl", function (materials) {
         });
     }
 
-})
+});
+
+var pantherLoader = new ColladaLoader();
+pantherLoader.setPath("./src/models/");
+pantherLoader.load("panter.dae", function (daeScene) {
+    let dae = daeScene.scene;
+    dae.scale.set(0.05, 0.05, 0.05);
+    dae.rotateZ(-Math.PI/4);
+    dae.position.set(5, 0, -2);
+    scene.add(dae);
+});
+
+var capybaraLoader = new ColladaLoader();
+capybaraLoader.setPath("./src/models/");
+capybaraLoader.load("capybara.dae", function (daeScene) {
+    let dae = daeScene.scene;
+    dae.rotateZ(-Math.PI/2);
+    dae.scale.set(0.05, 0.05, 0.05);
+    dae.position.set(-1.7, 0, 4);
+    scene.add(dae);
+});
 
 
 var animate = function () {
