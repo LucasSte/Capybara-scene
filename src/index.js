@@ -8,7 +8,7 @@ import Capybara from "./Capybara.js";
 
 let scene = new THREE.Scene();
 scene.fog = new THREE.Fog(0x787e74, 0.1, 60);
-let camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+let camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 100);
 
 let renderer = new THREE.WebGLRenderer();
 //renderer.setClearColor(0x87CEEB, 1); -> This is the blue sky color
