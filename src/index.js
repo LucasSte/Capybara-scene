@@ -11,9 +11,11 @@ scene.fog = new THREE.Fog(0x787e74, 0.1, 60);
 let camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
 
 let renderer = new THREE.WebGLRenderer();
-//renderer.setClearColor(0x87CEEB, 1); -> This is the blue sky color
+// renderer.setClearColor(0x87CEEB, 1); //-> This is the blue sky color
 renderer.setClearColor(0x787e74, 1);
 renderer.setSize(window.innerWidth, window.innerHeight);
+renderer.shadowMap.enabled = true;
+renderer.shadowMap.type = THREE.PCFSoftShadowMap;
 document.body.appendChild(renderer.domElement);
 
 let texture = THREE.ImageUtils.loadTexture("./src/grass.jpg");
@@ -21,14 +23,22 @@ texture.wrapS = THREE.RepeatWrapping;
 texture.wrapT = THREE.RepeatWrapping;
 texture.repeat.set(40, 40);
 let planeGeometry = new THREE.PlaneBufferGeometry(100, 100, 8, 8);
-let material = new THREE.MeshLambertMaterial({map: texture});
+let material = new THREE.MeshPhongMaterial({map: texture});
 let plane = new THREE.Mesh(planeGeometry, material);
+plane.receiveShadow = true;
 planeGeometry.rotateX( - Math.PI / 2);
 
 scene.add(plane);
 
+let ambientLight = new THREE.AmbientLight(0xffffff, 0.2);
+scene.add(ambientLight);
 let light = new THREE.PointLight(0xffffff);
 light.position.set(0, 20, 10);
+light.castShadow = true;
+light.shadow.camera.near = 0.1;
+light.shadow.camera.far = 50;
+light.shadow.mapSize.width = 2048;
+light.shadow.mapSize.height = 2048;
 scene.add(light);
 
 let controls = new OrbitControls(camera, renderer.domElement);

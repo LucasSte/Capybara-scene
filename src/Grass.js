@@ -29,6 +29,10 @@ class Grass
                     obj.scale.set(0.5, 0.5, 0.5);
                     obj.position.set(x, 0, z);
                     obj.rotation.set(0, Math.PI/(x*z/3), 0);
+                    obj.traverse(function (child) {
+                        child.castShadow = true;
+                        child.receiveShadow = true;
+                    })
                     scene.add(obj);
                 })
             }

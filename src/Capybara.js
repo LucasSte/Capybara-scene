@@ -15,6 +15,12 @@ class Capybara
             dae.rotateZ(-Math.PI/2);
             dae.scale.set(scale, scale, scale);
             dae.position.set(-1.7, 0, 4);
+            dae.traverse(function (child) {
+                // if(child instanceof THREE.Mesh){
+                    child.castShadow = true;
+                    child.receiveShadow = true;
+                // }
+            })
             scene.add(dae);
         });
     }

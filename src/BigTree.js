@@ -13,6 +13,10 @@ class BigTree
             let dae = tree.scene;
             dae.scale.set(scale, scale, scale);
             dae.position.set(-5, 0, -8);
+            dae.traverse(function (child) {
+                child.castShadow = true;
+                child.receiveShadow = true;
+            })
             scene.add(dae);
         });
 
@@ -21,6 +25,10 @@ class BigTree
             dae.rotateZ(-1);
             dae.scale.set(scale, scale, scale);
             dae.position.set(7, 0, -6);
+            dae.traverse(function (child) {
+                child.castShadow = true;
+                child.receiveShadow = true;
+            })
             scene.add(dae);
         });
     }
