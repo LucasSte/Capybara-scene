@@ -1,5 +1,5 @@
-import {MTLLoader} from "../three.js/examples/jsm/loaders/MTLLoader.js";
-import {OBJLoader} from "../three.js/examples/jsm/loaders/OBJLoader.js";
+import {MTLLoader} from "./three_src/MTLLoader.js";
+import {OBJLoader} from "./three_src/OBJLoader.js";
 
 class Grass
 {

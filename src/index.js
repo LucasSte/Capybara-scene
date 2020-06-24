@@ -1,5 +1,5 @@
-import * as THREE from "../three.js/build/three.module.js";
-import {OrbitControls} from "../three.js/examples/jsm/controls/OrbitControls.js";
+import * as THREE from "./three_src/three.module.js";
+import {OrbitControls} from "./three_src/OrbitControls.js";
 import Grass from "./Grass.js";
 import BigTree from "./BigTree.js";
 import SmallTree from "./SmallTree.js";
@@ -8,7 +8,7 @@ import Capybara from "./Capybara.js";
 
 let scene = new THREE.Scene();
 scene.fog = new THREE.Fog(0x787e74, 0.1, 60);
-let camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+let camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 100);
 
 // RENDER
 let renderer = new THREE.WebGLRenderer({antialias: true});
