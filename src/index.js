@@ -1,5 +1,5 @@
-import * as THREE from "../three.js/build/three.module.js";
-import {OrbitControls} from "../three.js/examples/jsm/controls/OrbitControls.js";
+import * as THREE from "./three_src/three.module.js";
+import {OrbitControls} from "./three_src/OrbitControls.js";
 import Grass from "./Grass.js";
 import BigTree from "./BigTree.js";
 import SmallTree from "./SmallTree.js";
