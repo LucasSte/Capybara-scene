@@ -10,7 +10,7 @@ let scene = new THREE.Scene();
 scene.fog = new THREE.Fog(0x787e74, 0.1, 60);
 let camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
 
-let renderer = new THREE.WebGLRenderer();
+let renderer = new THREE.WebGLRenderer({antialias: true});
 // renderer.setClearColor(0x87CEEB, 1); //-> This is the blue sky color
 renderer.setClearColor(0x787e74, 1);
 renderer.setSize(window.innerWidth, window.innerHeight);
