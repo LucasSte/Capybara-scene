@@ -18,12 +18,36 @@ renderer.shadowMap.enabled = true;
 renderer.shadowMap.type = THREE.PCFSoftShadowMap;
 document.body.appendChild(renderer.domElement);
 
-let texture = THREE.ImageUtils.loadTexture("./src/grass.jpg");
+// let texture = THREE.ImageUtils.loadTexture("./src/grass.jpg");
+let texture = THREE.ImageUtils.loadTexture("./src/ground.jpg");
 texture.wrapS = THREE.RepeatWrapping;
 texture.wrapT = THREE.RepeatWrapping;
-texture.repeat.set(40, 40);
+texture.repeat.set(10, 10);
+
+// let textureNormal = THREE.ImageUtils.loadTexture("./src/grassNormal.jpg");
+let textureNormal = THREE.ImageUtils.loadTexture("./src/groundNormal.jpg");
+textureNormal.wrapS = THREE.RepeatWrapping;
+textureNormal.wrapT = THREE.RepeatWrapping;
+textureNormal.repeat.set(10, 10);
+
+let textureBump = THREE.ImageUtils.loadTexture("./src/grassBump.jpg");
+textureBump.wrapS = THREE.RepeatWrapping;
+textureBump.wrapT = THREE.RepeatWrapping;
+textureBump.repeat.set(10, 10);
+
+// let textureSpecular = THREE.ImageUtils.loadTexture("./src/grassSpecular.jpg");
+let textureSpecular = THREE.ImageUtils.loadTexture("./src/groundSpecular.jpg");
+textureSpecular.wrapS = THREE.RepeatWrapping;
+textureSpecular.wrapT = THREE.RepeatWrapping;
+textureSpecular.repeat.set(10, 10);
+
 let planeGeometry = new THREE.PlaneBufferGeometry(100, 100, 8, 8);
-let material = new THREE.MeshPhongMaterial({map: texture});
+let material = new THREE.MeshPhongMaterial({
+    map:texture,
+    normalMap: textureNormal,
+    // bumpMap: textureBump,
+    specularMap: textureSpecular
+});
 let plane = new THREE.Mesh(planeGeometry, material);
 plane.receiveShadow = true;
 planeGeometry.rotateX( - Math.PI / 2);
