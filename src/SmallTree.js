@@ -15,6 +15,10 @@ class SmallTree
             dae.scale.set(scale, scale, scale);
             dae.position.set(10, 0, 0);
             scene.add(dae);
+            dae.traverse(function (child) {
+                child.castShadow = true;
+                child.receiveShadow = true;
+            })
         });
 
         loader.load(this.fileName, function (tree) {
@@ -22,6 +26,10 @@ class SmallTree
             dae.scale.set(scale, scale, scale);
             dae.rotateZ(-0.15);
             dae.position.set(-8, 0, -0.5);
+            dae.traverse(function (child) {
+                child.castShadow = true;
+                child.receiveShadow = true;
+            })
             scene.add(dae);
         });
 
@@ -30,6 +38,10 @@ class SmallTree
             dae.scale.set(scale, scale, scale);
             dae.rotateZ(-1.5);
             dae.position.set(-10, 0, 5);
+            dae.traverse(function (child) {
+                child.castShadow = true;
+                child.receiveShadow = true;
+            })
             scene.add(dae);
         });
 
@@ -38,6 +50,10 @@ class SmallTree
             dae.scale.set(scale, scale, scale);
             dae.rotateZ(1.7);
             dae.position.set(0, 0, -10);
+            dae.traverse(function (child) {
+                child.castShadow = true;
+                child.receiveShadow = true;
+            })
             scene.add(dae);
         });
     }

@@ -15,6 +15,10 @@ class Panther
             dae.scale.set(scale, scale, scale);
             dae.rotateZ(-Math.PI/4);
             dae.position.set(5, 0, -2);
+            dae.traverse(function (child) {
+                child.castShadow = true;
+                child.receiveShadow = true;
+            })
             scene.add(dae);
         });
     }
