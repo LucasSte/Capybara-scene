@@ -9,7 +9,28 @@
     </style>
 </head>
 <body>
-<script type="module" src="src/index.js"></script>
+    <script type="module" src="src/index.js"></script>
+    <script id="vertexShader" type="x-shader/x-vertex">
+		varying float intensity;
+		varying vec2 textureCoords;
+
+        void main()	{
+            gl_Position = projectionMatrix * modelViewMatrix *vec4( position, 1.0 );
+			intensity = clamp(dot(normal,vec3(0.57,0.58,0.57)),0.0,1.0);
+			textureCoords=uv.xy;
+        }
+    </script>
+
+
+    <script id="fragmentShader" type="x-shader/x-fragment">
+		varying float intensity;
+		varying vec2 textureCoords;
+        uniform sampler2D mtexture;
+        void main()	{
+            gl_FragColor = vec4(intensity*texture2D(mtexture,textureCoords).rgb, 1.);
+        }
+
+    </script>
 
 </body>
 
