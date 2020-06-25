@@ -1,5 +1,5 @@
-import {ColladaLoader} from "../three.js/examples/jsm/loaders/ColladaLoader.js";
-import * as THREE from "../three.js/build/three.module.js";
+import {ColladaLoader} from "./three_src/ColladaLoader.js";
+import * as THREE from "./three_src/three.module.js";
 
 class Panther
 {
