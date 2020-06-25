@@ -1,11 +1,12 @@
-import {ColladaLoader} from "./three_src/ColladaLoader.js";
+import {ColladaLoader} from "../three.js/examples/jsm/loaders/ColladaLoader.js";
+import * as THREE from "../three.js/build/three.module.js";
 
 class Panther
 {
     modelsPath;
     fileName = "panter.dae";
 
-    load(scene)
+    load(scene, document)
     {
         let scale = 0.05;
         let loader = new ColladaLoader();
@@ -18,6 +19,17 @@ class Panther
             dae.traverse(function (child) {
                 child.castShadow = true;
                 child.receiveShadow = true;
+                if (child.material)
+                {
+                    let uniforms = {
+                        mtexture: new THREE.Uniform(child.material.map)
+                    };
+                    child.material = new THREE.ShaderMaterial({
+                        uniforms: uniforms,
+                        vertexShader: document.getElementById( 'vertexShader' ).textContent,
+                        fragmentShader: document.getElementById( 'fragmentShader' ).textContent
+                    });
+                }
             })
             scene.add(dae);
         });
