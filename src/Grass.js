@@ -12,8 +12,8 @@ class Grass
         mtlLoader.setPath(this.modelsPath);
         let path = this.modelsPath;
         let file = this.fileName;
-        let xPos = [-5, -4, 0, 1, 6, 10, -7, -2, 4, 5];
-        let zPos = [5, 4, 0, 1, 6, 0, -3, -2, 3, 8];
+        let xPos = [-5, -4, 0, 1, 6, 10, -5, -2, 4, 5];
+        let zPos = [5, 4, 0, 1, 6, 0, -2, -2, 3, 8];
         mtlLoader.load(file + ".mtl", function (materials) {
             materials.preload();
 
